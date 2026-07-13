@@ -2,6 +2,7 @@ library(shiny)
 library(leaflet)
 library(sf)
 library(dplyr)
+library(rsconnect)
 
 # Source the metadata definition
 source("metadata.R")

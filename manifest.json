@@ -4,8 +4,9 @@
   "platform": "4.6.1",
   "metadata": {
     "appmode": "shiny",
-    "primary_rmd": null,
+    "primary_rmd": "app.R",
     "primary_html": null,
+    "primary_file": "app.R",
     "content_category": null,
     "has_parameters": false
   },
