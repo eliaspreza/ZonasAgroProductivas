@@ -3,6 +3,9 @@ library(leaflet)
 library(sf)
 library(dplyr)
 library(rsconnect)
+library(terra)
+
+
 
 # Source the metadata definition
 source("metadata.R")
