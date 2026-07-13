@@ -1,0 +1,492 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.75);
+  --border-color: rgba(15, 23, 42, 0.08);
+  --accent-color: #059669; /* emerald/agricultural green */
+  --accent-blue: #0284c7;  /* ocean/water blue */
+  --accent-orange: #ea580c; /* deeper warm orange */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* Layout */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sidebar Panel */
+.sidebar-panel {
+  width: 380px;
+  min-width: 380px;
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 10;
+  box-shadow: 10px 0 30px rgba(15, 23, 42, 0.04);
+}
+
+/* Header */
+.app-header {
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 20px;
+}
+
+.app-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-badge {
+  background: linear-gradient(135deg, var(--accent-color), #047857);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+.app-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(to right, #0f172a, #334155);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.app-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  margin-bottom: 0;
+  font-weight: 300;
+}
+
+.app-institution {
+  font-size: 0.85rem;
+  color: var(--accent-color);
+  margin-top: 6px;
+  margin-bottom: 0;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Controls groups */
+.control-group {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* Set relative position for stacking contexts */
+}
+
+/* Stacking context fixes for selectize dropdowns in control groups */
+.sidebar-panel .control-group:nth-child(2) { z-index: 10; }
+.sidebar-panel .control-group:nth-child(3) { z-index: 9; }
+.sidebar-panel .control-group:nth-child(4) { z-index: 8; }
+.sidebar-panel .control-group:nth-child(5) { z-index: 7; }
+.sidebar-panel .control-group:nth-child(6) { z-index: 6; }
+
+.control-group:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.control-group-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+}
+
+.control-group-title i {
+  color: var(--accent-color);
+}
+
+/* Custom Checkbox Group styling */
+.shiny-input-checkboxgroup .checkbox, .shiny-input-container .checkbox {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.checkbox label {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s ease;
+}
+
+.checkbox label:hover {
+  color: var(--text-primary);
+}
+
+.checkbox input[type="checkbox"] {
+  accent-color: var(--accent-color);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Custom Radio Button styling */
+.shiny-input-radiogroup .radio label {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.shiny-input-radiogroup .radio input[type="radio"] {
+  accent-color: var(--accent-color);
+  cursor: pointer;
+}
+
+/* Map Area */
+.map-container {
+  flex-grow: 1;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
+  height: 0;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Value Boxes Container */
+.value-boxes-container {
+  display: flex;
+  gap: 16px;
+  padding: 16px 20px;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.value-box {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.value-box:hover {
+  border-color: rgba(16, 185, 129, 0.25);
+  transform: translateY(-2px);
+}
+
+.value-box-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--accent-color);
+}
+
+.value-box-icon.blue {
+  background: rgba(2, 132, 199, 0.12);
+  color: var(--accent-blue);
+}
+
+.value-box-icon.orange {
+  background: rgba(249, 115, 22, 0.12);
+  color: var(--accent-orange);
+}
+
+.value-box-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.value-box-number {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.value-box-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+/* Leaflet dark styling overrides */
+.leaflet-container {
+  background: var(--bg-primary) !important;
+}
+
+.leaflet-bar {
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+.leaflet-bar a {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.leaflet-bar a:hover {
+  background-color: var(--accent-color) !important;
+  color: white !important;
+}
+
+/* Floating Info Panel on Map */
+.floating-info-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 360px;
+  max-height: calc(100vh - 40px);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  z-index: 1000;
+  backdrop-filter: blur(15px);
+  box-shadow: var(--shadow);
+  overflow-y: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.floating-panel-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Section styling inside details card */
+.detail-section {
+  margin-bottom: 16px;
+}
+
+.detail-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.detail-value {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.detail-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.detail-tag {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #000000;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.detail-tag-blue {
+  background: rgba(2, 132, 199, 0.15);
+  border: 1px solid rgba(2, 132, 199, 0.35);
+  color: #000000;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+/* Stats grid inside panel */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+
+.stat-card {
+  background: rgba(15, 23, 42, 0.02);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 2px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* Legend styling */
+.map-legend {
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  backdrop-filter: blur(10px);
+}
+
+.legend-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 0.92rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  padding-bottom: 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.legend-color-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(15, 23, 42, 0.15);
+}
+
+/* Select input customization */
+.selectize-control.single .selectize-input {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.selectize-dropdown {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+}
+
+.selectize-dropdown .active {
+  background: var(--accent-color) !important;
+  color: white !important;
+}
+
+/* Placeholder for empty state details */
+.info-empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+
+.info-empty-state i {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  color: rgba(15, 23, 42, 0.05);
+}
